@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: mascot_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mascot_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # FastAPI Backend
+  api:
+    build: .
+    container_name: mascot_api
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/mascot_db
+      ENVIRONMENT: development
+      JWT_SECRET: your_super_secret_key_change_in_production
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+
+  # pgAdmin (Database GUI)
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: mascot_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@mascot.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:

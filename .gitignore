@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+venv312/
+backend/venv312/
+ENV/
+env/
+.env
+
+# Environment variables
+.env.local
+.env.*.local
+*.env
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+*.coveragerc
+
+# IDEs
+.vscode/settings.json
+.idea/
+*.iml
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node / React Native / Expo
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.expo/
+.expo-shared/
+dist/
+*.tgz
+
+# SQLite
+*.sqlite
+*.db
+
+# Logs
+*.log
+logs/
+
+# Secret files
+*.pem
+*.key
+secrets/
