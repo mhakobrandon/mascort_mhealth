@@ -65,7 +65,7 @@ async def register_user(
     """
     user_uuid = uuid.uuid4()
     user = User(
-        user_id=user_uuid,
+        user_id=str(user_uuid),
         device_id=device_id,
         created_at=datetime.now(timezone.utc),
         last_accessed=datetime.now(timezone.utc),
@@ -79,7 +79,7 @@ async def register_user(
     # Create initial session
     session_token = str(uuid.uuid4())
     session = UserSession(
-        user_id=user_uuid,
+        user_id=str(user_uuid),
         session_token=session_token,
         screens_visited=[],
         created_at=datetime.now(timezone.utc),

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Optional, List
+from typing import Optional, List, Any
 from datetime import datetime
 from enum import Enum
 
@@ -54,7 +54,7 @@ class PreventionMethodBase(BaseModel):
     cost: str
     side_effects: str
     how_to_use: str
-    details: PreventionMethodDetail
+    details: Optional[Any] = None
 
 class PreventionMethodCreate(PreventionMethodBase):
     pass

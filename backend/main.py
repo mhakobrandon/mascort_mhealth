@@ -34,6 +34,7 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -44,7 +45,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Import and register routers
 from routes.auth import router as auth_router
 from routes.prevention import router as prevention_router
 from routes.clinics import router as clinics_router

@@ -1,4 +1,4 @@
-import { Outlet, NavLink, useLocation } from 'react-router-dom'
+import { Outlet, NavLink } from 'react-router-dom'
 import {
   Home, Shield, MapPin, Bot, Play, Quote, Package, Menu, X
 } from 'lucide-react'
@@ -16,7 +16,6 @@ const navItems = [
 
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
-  const location = useLocation()
 
   return (
     <div className="min-h-screen flex flex-col">

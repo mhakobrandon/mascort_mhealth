@@ -124,7 +124,9 @@ async def get_all_clinics(
     query = db.query(Clinic)
 
     if services:
-        query = query.filter(Clinic.services.contains([services]))
+        # JSON column in SQLite: filter in Python after fetch
+        clinics = query.all()
+        return [c for c in clinics if services in (c.services or [])]
 
     if is_lgbtq_friendly is not None:
         query = query.filter(Clinic.is_lgbtq_friendly == is_lgbtq_friendly)
