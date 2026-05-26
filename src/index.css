@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-mascotPurple-light: #F3E8FF;
+  --color-mascotPurple: #7C3AED; 
+  --color-mascotPurple-dark: #5B21B6;
+  --color-mascotGreen-light: #DCFCE7;
+  --color-mascotGreen: #22C55E; 
+  --color-mascotGreen-dark: #166534;
+}
+
+@utility animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
