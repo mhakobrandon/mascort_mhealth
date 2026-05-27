@@ -13,7 +13,7 @@ const CATEGORIES = [
 function categoryColor(cat: string) {
   if (cat === 'hiv_prevention') return { bg: 'bg-green-50 border-green-200', text: 'text-green-700', badge: 'bg-green-100 text-green-700' }
   if (cat === 'emergency') return { bg: 'bg-red-50 border-red-200', text: 'text-red-700', badge: 'bg-red-100 text-red-700' }
-  return { bg: 'bg-purple-50 border-purple-200', text: 'text-purple-700', badge: 'bg-purple-100 text-purple-700' }
+  return { bg: 'bg-primary-50 border-primary-200', text: 'text-primary-700', badge: 'bg-primary-100 text-primary-700' }
 }
 
 function categoryLabel(cat: string) {
@@ -48,7 +48,7 @@ export default function PreventionPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Prevention Methods</h1>
+        <h1 className="text-3xl font-black mb-2">Prevention Methods</h1>
         <p className="text-gray-500">Evidence-based options for HIV and pregnancy prevention</p>
       </div>
 
@@ -60,7 +60,7 @@ export default function PreventionPage() {
           placeholder="Search methods..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
         />
       </div>
 
@@ -72,8 +72,8 @@ export default function PreventionPage() {
             onClick={() => setActiveCategory(key)}
             className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
               activeCategory === key
-                ? 'bg-purple-600 text-white'
-                : 'bg-white border border-gray-200 text-gray-600 hover:border-purple-300'
+                ? 'bg-primary-600 text-white'
+                : 'bg-white border border-gray-200 text-gray-600 hover:border-primary-300'
             }`}
           >
             {label}

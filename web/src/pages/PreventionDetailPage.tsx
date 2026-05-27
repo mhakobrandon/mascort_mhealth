@@ -27,7 +27,7 @@ export default function PreventionDetailPage() {
   if (!method) return (
     <div className="max-w-3xl mx-auto px-4 py-16 text-center">
       <p className="text-gray-500">Method not found</p>
-      <Link to="/prevention" className="mt-4 inline-flex items-center gap-2 text-purple-600">
+      <Link to="/prevention" className="mt-4 inline-flex items-center gap-2 text-primary-600">
         <ArrowLeft size={16} /> Back to Prevention Methods
       </Link>
     </div>
@@ -41,27 +41,27 @@ export default function PreventionDetailPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
-      <Link to="/prevention" className="inline-flex items-center gap-2 text-purple-600 text-sm font-medium mb-6 hover:underline">
+      <Link to="/prevention" className="inline-flex items-center gap-2 text-primary-600 text-sm font-medium mb-6 hover:underline">
         <ArrowLeft size={16} /> Back to Prevention Methods
       </Link>
 
       {/* Header */}
-      <div className="card p-8 mb-6 bg-gradient-to-br from-purple-50 to-blue-50 border-purple-200">
-        <span className="badge bg-purple-100 text-purple-700 mb-3 inline-block">
+      <div className="card p-8 mb-6 bg-gradient-to-br from-primary-50 to-primary-100 border-primary-200">
+        <span className="badge bg-primary-100 text-primary-700 mb-3 inline-block">
           {method.category.replace('_', ' ')}
         </span>
-        <h1 className="text-3xl font-bold mb-2">{method.name}</h1>
+        <h1 className="text-3xl font-black mb-2">{method.name}</h1>
         <p className="text-gray-600 leading-relaxed">{method.description}</p>
       </div>
 
       {/* Effectiveness */}
       <div className="card p-6 mb-6">
         <div className="flex items-center gap-2 mb-4">
-          <TrendingUp className="text-purple-600" size={20} />
+          <TrendingUp className="text-primary-600" size={20} />
           <h2 className="font-semibold text-lg">Effectiveness</h2>
         </div>
         <div className="flex items-center gap-4 mb-3">
-          <div className={`text-4xl font-bold ${effColor}`}>{effectiveness}%</div>
+          <div className={`text-4xl font-black ${effColor}`}>{effectiveness}%</div>
           <div className="flex-1">
             <div className="bg-gray-100 rounded-full h-3 mb-1">
               <div className={`h-3 rounded-full ${barColor} transition-all`} style={{ width: `${effectiveness}%` }} />
@@ -78,14 +78,14 @@ export default function PreventionDetailPage() {
       {/* How to use */}
       <div className="card p-6 mb-6">
         <h2 className="font-semibold text-lg mb-4 flex items-center gap-2">
-          <ChevronRight className="text-purple-600" size={20} />
+          <ChevronRight className="text-primary-600" size={20} />
           How to Use
         </h2>
         {steps.length > 0 ? (
           <ol className="space-y-3">
             {steps.map((step: string, i: number) => (
               <li key={i} className="flex gap-3">
-                <span className="w-7 h-7 bg-purple-600 text-white rounded-full flex items-center justify-center text-sm font-semibold shrink-0">
+                <span className="w-7 h-7 bg-primary-600 text-white rounded-full flex items-center justify-center text-sm font-semibold shrink-0">
                   {i + 1}
                 </span>
                 <span className="text-gray-600 leading-relaxed pt-0.5">{step}</span>
@@ -119,7 +119,7 @@ export default function PreventionDetailPage() {
       <div className="flex flex-col sm:flex-row gap-4">
         <Link
           to="/chat"
-          className="flex-1 bg-purple-600 text-white py-3 rounded-xl font-semibold text-center hover:bg-purple-700 transition-colors"
+          className="flex-1 bg-primary-600 text-white py-3 rounded-xl font-semibold text-center hover:bg-primary-700 transition-colors"
         >
           Ask AI for More Info
         </Link>

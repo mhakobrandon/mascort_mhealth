@@ -37,10 +37,10 @@ export default function RequestSuppliesPage() {
 
   if (success) return (
     <div className="max-w-lg mx-auto px-4 py-16 text-center">
-      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-        <Check className="text-green-500" size={40} />
+      <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <Check className="text-primary-600" size={40} />
       </div>
-      <h2 className="text-2xl font-bold mb-3">Request Submitted!</h2>
+      <h2 className="text-2xl font-black mb-3">Request Submitted!</h2>
       <p className="text-gray-500 mb-8">
         Your request for <strong>{ITEMS.find((i) => i.value === itemType)?.label}</strong> has been received.
         {deliveryMethod === 'pickup'
@@ -50,7 +50,7 @@ export default function RequestSuppliesPage() {
       <div className="flex gap-4 justify-center">
         <button
           onClick={() => { setSuccess(false); setQuantity(1); setLocation('') }}
-          className="bg-purple-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-purple-700 transition-colors"
+          className="bg-primary-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-700 transition-colors"
         >
           Another Request
         </button>
@@ -61,11 +61,11 @@ export default function RequestSuppliesPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Request Supplies</h1>
+        <h1 className="text-3xl font-black mb-2">Request Supplies</h1>
         <p className="text-gray-500">Free, discreet delivery of prevention commodities</p>
       </div>
 
-      <div className="flex items-center gap-2 bg-purple-50 border border-purple-200 rounded-xl px-4 py-3 mb-8 text-sm text-purple-700">
+      <div className="flex items-center gap-2 bg-primary-50 border border-primary-200 rounded-xl px-4 py-3 mb-8 text-sm text-primary-700">
         <Lock size={14} />
         All requests are confidential and delivered discreetly
       </div>
@@ -82,12 +82,12 @@ export default function RequestSuppliesPage() {
                 onClick={() => setItemType(item.value)}
                 className={`p-4 rounded-xl border-2 text-left transition-all ${
                   itemType === item.value
-                    ? 'border-purple-600 bg-purple-50'
-                    : 'border-gray-200 hover:border-purple-300'
+                    ? 'border-primary-600 bg-primary-50'
+                    : 'border-gray-200 hover:border-primary-300'
                 }`}
               >
                 <div className="text-2xl mb-2">{item.icon}</div>
-                <div className={`text-sm font-medium ${itemType === item.value ? 'text-purple-700' : 'text-gray-700'}`}>
+                <div className={`text-sm font-medium ${itemType === item.value ? 'text-primary-700' : 'text-gray-700'}`}>
                   {item.label}
                 </div>
               </button>
@@ -130,11 +130,11 @@ export default function RequestSuppliesPage() {
                 type="button"
                 onClick={() => setDeliveryMethod(value)}
                 className={`p-4 rounded-xl border-2 text-center transition-all ${
-                  deliveryMethod === value ? 'border-purple-600 bg-purple-50' : 'border-gray-200 hover:border-purple-300'
+                  deliveryMethod === value ? 'border-primary-600 bg-primary-50' : 'border-gray-200 hover:border-primary-300'
                 }`}
               >
-                <Icon className={`mx-auto mb-2 ${deliveryMethod === value ? 'text-purple-600' : 'text-gray-400'}`} size={24} />
-                <div className={`font-semibold text-sm ${deliveryMethod === value ? 'text-purple-700' : 'text-gray-700'}`}>{label}</div>
+                <Icon className={`mx-auto mb-2 ${deliveryMethod === value ? 'text-primary-600' : 'text-gray-400'}`} size={24} />
+                <div className={`font-semibold text-sm ${deliveryMethod === value ? 'text-primary-700' : 'text-gray-700'}`}>{label}</div>
                 <div className="text-xs text-gray-400">{sub}</div>
               </button>
             ))}
@@ -153,7 +153,7 @@ export default function RequestSuppliesPage() {
             placeholder={
               deliveryMethod === 'pickup' ? 'e.g. UZ Campus, Harare' : 'e.g. Room 204, Swinton Hall, UZ'
             }
-            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
         </div>
 
@@ -162,7 +162,7 @@ export default function RequestSuppliesPage() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full bg-purple-600 text-white py-4 rounded-xl font-semibold hover:bg-purple-700 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
+          className="w-full bg-primary-600 text-white py-4 rounded-xl font-semibold hover:bg-primary-700 disabled:opacity-50 transition-colors flex items-center justify-center gap-2"
         >
           {submitting ? (
             <span className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" />

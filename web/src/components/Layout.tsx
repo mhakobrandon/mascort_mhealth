@@ -14,37 +14,49 @@ const navItems = [
   { to: '/request', icon: Package, label: 'Supplies' },
 ]
 
+function MascotLogo() {
+  return (
+    <div className="flex items-center gap-2">
+      <img
+        src="/mascot-logo.png"
+        alt="MASCOT mHealth logo"
+        className="w-[90px] h-[90px] object-contain"
+      />
+      <img
+        src="/mascot-text.png"
+        alt="mascot"
+        className="h-12 w-auto object-contain"
+      />
+    </div>
+  )
+}
+
 export default function Layout() {
   const [mobileOpen, setMobileOpen] = useState(false)
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-[#F5FAF0]">
       {/* Top navbar */}
-      <header className="bg-gradient-to-r from-purple-700 to-blue-600 text-white sticky top-0 z-50 shadow-lg">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-              <Shield size={18} />
-            </div>
-            <span className="font-bold text-lg tracking-wide">MASCOT mHealth</span>
-          </div>
+      <header className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div className="max-w-6xl mx-auto pl-0 pr-6 h-24 flex items-center justify-between">
+          <MascotLogo />
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Desktop nav — pill container matching reference */}
+          <nav className="hidden md:flex items-center bg-gray-100 rounded-full p-1 gap-0.5">
             {navItems.map(({ to, icon: Icon, label }) => (
               <NavLink
                 key={to}
                 to={to}
                 end={to === '/'}
                 className={({ isActive }) =>
-                  `flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  `flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium transition-all ${
                     isActive
-                      ? 'bg-white/20 text-white'
-                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                      ? 'bg-white text-gray-800 shadow-sm'
+                      : 'text-gray-500 hover:text-gray-700'
                   }`
                 }
               >
-                <Icon size={16} />
+                <Icon size={14} />
                 {label}
               </NavLink>
             ))}
@@ -52,7 +64,7 @@ export default function Layout() {
 
           {/* Mobile menu toggle */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-white/10"
+            className="md:hidden p-2 rounded-lg hover:bg-gray-50 text-gray-600"
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             {mobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -61,7 +73,7 @@ export default function Layout() {
 
         {/* Mobile nav drawer */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-white/20 py-2 px-4">
+          <div className="md:hidden border-t border-gray-100 py-2 px-4 bg-white">
             {navItems.map(({ to, icon: Icon, label }) => (
               <NavLink
                 key={to}
@@ -69,8 +81,10 @@ export default function Layout() {
                 end={to === '/'}
                 onClick={() => setMobileOpen(false)}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-3 rounded-lg text-sm font-medium mb-1 ${
-                    isActive ? 'bg-white/20' : 'text-white/80 hover:bg-white/10'
+                  `flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium mb-1 ${
+                    isActive
+                      ? 'bg-primary-50 text-primary-700'
+                      : 'text-gray-500 hover:bg-gray-50'
                   }`
                 }
               >
@@ -88,19 +102,60 @@ export default function Layout() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8 mt-12">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-2 mb-3">
-            <Shield size={18} className="text-purple-400" />
-            <span className="text-white font-semibold">MASCOT mHealth</span>
+      <footer className="bg-gray-900 text-gray-400 py-10 mt-12">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8">
+            <div className="text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-2 mb-3">
+                <img
+                  src="/mascot-logo.png"
+                  alt="MASCOT mHealth logo"
+                  className="w-[66px] h-[66px] object-contain brightness-0 invert"
+                />
+                <div>
+                  <img src="/mascot-text.png" alt="mascot" className="h-7 w-auto object-contain brightness-0 invert mb-0.5" />
+                  <div className="text-primary-400 text-[10px] font-semibold tracking-widest uppercase">mHealth</div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-400 max-w-xs">
+                Self-care for young people in Zimbabwe. Free, confidential health support.
+              </p>
+            </div>
+
+            <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm">
+              <div>
+                <div className="text-white font-semibold mb-3">Services</div>
+                <div className="space-y-2">
+                  <div>Prevention Methods</div>
+                  <div>Find Clinics</div>
+                  <div>Request Supplies</div>
+                </div>
+              </div>
+              <div>
+                <div className="text-white font-semibold mb-3">Learn</div>
+                <div className="space-y-2">
+                  <div>Video Guides</div>
+                  <div>AI Health Chat</div>
+                  <div>Community Stories</div>
+                </div>
+              </div>
+              <div>
+                <div className="text-white font-semibold mb-3">About</div>
+                <div className="space-y-2">
+                  <div>Team HealthBridge</div>
+                  <div>CeSHHAR Zimbabwe</div>
+                  <div>Hackathon 2026</div>
+                </div>
+              </div>
+            </div>
           </div>
-          <p className="text-sm">
-            A youth-centered health platform by Team HealthBridge — University of Zimbabwe
-          </p>
-          <p className="text-xs mt-2">MASCOT Hackathon 2026 · CeSHHAR Zimbabwe</p>
-          <div className="mt-4 flex items-center justify-center gap-2 text-xs">
-            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-            <span>All conversations are private and anonymous</span>
+
+          <div className="border-t border-gray-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+            <span>MASCOT Hackathon 2026 · University of Zimbabwe</span>
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 bg-primary-400 rounded-full"></span>
+              <span>All conversations are private and anonymous</span>
+            </div>
           </div>
         </div>
       </footer>

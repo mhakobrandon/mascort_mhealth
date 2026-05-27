@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --primary: #7B2FBE;
-  --primary-light: #9D5FD4;
+  --primary: #93C962;
+  --primary-light: #9DD265;
   --secondary: #22C55E;
 }
 
@@ -14,8 +14,8 @@
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #F8F5FF;
-  color: #1A1A2E;
+  background-color: #F5FAF0;
+  color: #1A2010;
   margin: 0;
 }
 

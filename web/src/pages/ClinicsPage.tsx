@@ -31,7 +31,7 @@ export default function ClinicsPage() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Find Services</h1>
+        <h1 className="text-3xl font-black mb-2">Find Services</h1>
         <p className="text-gray-500">Clinics and health services near you in Zimbabwe</p>
       </div>
 
@@ -44,13 +44,13 @@ export default function ClinicsPage() {
             placeholder="Search by name or location..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
           />
         </div>
         <button
           onClick={() => setLgbtqOnly(!lgbtqOnly)}
           className={`px-4 py-3 rounded-xl border font-medium text-sm flex items-center gap-2 transition-colors ${
-            lgbtqOnly ? 'bg-purple-600 text-white border-purple-600' : 'bg-white border-gray-200 text-gray-600 hover:border-purple-300'
+            lgbtqOnly ? 'bg-primary-600 text-white border-primary-600' : 'bg-white border-gray-200 text-gray-600 hover:border-primary-300'
           }`}
         >
           <Heart size={16} />
@@ -92,7 +92,7 @@ export default function ClinicsPage() {
                     </div>
                   </div>
                   {clinic.is_lgbtq_friendly && (
-                    <span className="badge bg-purple-100 text-purple-700 flex items-center gap-1">
+                    <span className="badge bg-primary-100 text-primary-700 flex items-center gap-1">
                       <Heart size={10} />
                       LGBTQ+
                     </span>

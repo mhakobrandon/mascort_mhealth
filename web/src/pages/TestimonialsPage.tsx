@@ -13,7 +13,7 @@ const TESTIMONIALS = [
 function topicColor(t: string) {
   if (t === 'hiv_prevention') return 'bg-green-100 text-green-700'
   if (t === 'counselling') return 'bg-blue-100 text-blue-700'
-  return 'bg-purple-100 text-purple-700'
+  return 'bg-primary-100 text-primary-700'
 }
 
 export default function TestimonialsPage() {
@@ -24,12 +24,12 @@ export default function TestimonialsPage() {
     <div className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex items-start justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Community Stories</h1>
+          <h1 className="text-3xl font-black mb-2">Community Stories</h1>
           <p className="text-gray-500">Real experiences from real students</p>
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-purple-700 transition-colors"
+          className="flex items-center gap-2 bg-primary-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-primary-700 transition-colors"
         >
           {showForm ? <X size={16} /> : <Plus size={16} />}
           {showForm ? 'Cancel' : 'Share Yours'}
@@ -39,12 +39,12 @@ export default function TestimonialsPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-4 mb-8">
         {[
-          { value: '2,400+', label: 'Students Helped', color: 'text-purple-600 bg-purple-50' },
+          { value: '2,400+', label: 'Students Helped', color: 'text-primary-600 bg-primary-50' },
           { value: '4.9/5', label: 'Average Rating', color: 'text-green-600 bg-green-50' },
           { value: '98%', label: 'Would Recommend', color: 'text-amber-600 bg-amber-50' },
         ].map(({ value, label, color }) => (
           <div key={label} className={`${color} rounded-2xl p-4 text-center`}>
-            <div className="text-2xl font-bold">{value}</div>
+            <div className="text-2xl font-black">{value}</div>
             <div className="text-sm opacity-70">{label}</div>
           </div>
         ))}
@@ -52,19 +52,19 @@ export default function TestimonialsPage() {
 
       {/* Submit form */}
       {showForm && (
-        <div className="card p-6 mb-8 border-purple-200">
+        <div className="card p-6 mb-8 border-primary-200">
           <h2 className="font-semibold text-lg mb-4">Share Your Experience</h2>
           <p className="text-sm text-gray-500 mb-4">Anonymous — reviewed before publishing</p>
           <div className="space-y-4">
             <input
               type="text"
               placeholder='Your name or nickname (e.g. "Tino, 22")'
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500"
             />
             <textarea
               rows={4}
               placeholder="How has MASCOT mHealth helped you?"
-              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 resize-none"
             />
             <div className="flex items-center gap-2">
               <span className="text-sm font-medium">Rating:</span>
@@ -74,7 +74,7 @@ export default function TestimonialsPage() {
             </div>
             <button
               onClick={() => { setSubmitted(true); setShowForm(false) }}
-              className="w-full bg-purple-600 text-white py-3 rounded-xl font-semibold hover:bg-purple-700 transition-colors"
+              className="w-full bg-primary-600 text-white py-3 rounded-xl font-semibold hover:bg-primary-700 transition-colors"
             >
               Submit Story
             </button>
@@ -93,7 +93,7 @@ export default function TestimonialsPage() {
         {TESTIMONIALS.map((t) => (
           <div key={t.id} className="card p-6">
             <div className="flex items-start gap-3 mb-4">
-              <div className="w-10 h-10 bg-purple-100 rounded-xl flex items-center justify-center text-purple-600 font-bold text-lg shrink-0">
+              <div className="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 font-bold text-lg shrink-0">
                 {t.author[0]}
               </div>
               <div className="flex-1 min-w-0">
