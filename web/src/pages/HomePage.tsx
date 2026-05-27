@@ -69,7 +69,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Stats strip ──────────────────────────────────── */}
-      <section className="bg-white border-y border-gray-100 py-5">
+      <section className="bg-white border-y border-gray-100 py-5 animate-drop-flash">
         <div className="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
           {[
             { icon: ThumbsUp, value: '2,400+', label: 'Students Helped' },
