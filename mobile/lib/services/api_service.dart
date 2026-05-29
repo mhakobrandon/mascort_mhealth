@@ -4,8 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/models.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://10.0.2.2:8000'; // Android emulator → localhost
+  // static const String baseUrl = 'http://10.0.2.2:8000'; // Android emulator → localhost
   // For physical device, replace with your machine's IP: 'http://192.168.x.x:8000'
+  static const String baseUrl = 'http://172.17.6.165:8000';
 
   static ApiService? _instance;
   static ApiService get instance => _instance ??= ApiService._();
@@ -52,14 +53,17 @@ class ApiService {
 
   // ==================== PREVENTION METHODS ====================
 
-  Future<List<PreventionMethod>> getPreventionMethods({String? category}) async {
+  Future<List<PreventionMethod>> getPreventionMethods(
+      {String? category}) async {
     final uri = Uri.parse('$baseUrl/api/prevention/').replace(
       queryParameters: category != null ? {'category': category} : null,
     );
     final resp = await http.get(uri, headers: _headers);
     if (resp.statusCode == 200) {
       final list = jsonDecode(resp.body) as List;
-      return list.map((j) => PreventionMethod.fromJson(j as Map<String, dynamic>)).toList();
+      return list
+          .map((j) => PreventionMethod.fromJson(j as Map<String, dynamic>))
+          .toList();
     }
     throw ApiException('Failed to load prevention methods', resp.statusCode);
   }
@@ -70,7 +74,8 @@ class ApiService {
       headers: _headers,
     );
     if (resp.statusCode == 200) {
-      return PreventionMethod.fromJson(jsonDecode(resp.body) as Map<String, dynamic>);
+      return PreventionMethod.fromJson(
+          jsonDecode(resp.body) as Map<String, dynamic>);
     }
     throw ApiException('Prevention method not found', resp.statusCode);
   }
@@ -82,7 +87,9 @@ class ApiService {
     final resp = await http.get(uri, headers: _headers);
     if (resp.statusCode == 200) {
       final list = jsonDecode(resp.body) as List;
-      return list.map((j) => PreventionMethod.fromJson(j as Map<String, dynamic>)).toList();
+      return list
+          .map((j) => PreventionMethod.fromJson(j as Map<String, dynamic>))
+          .toList();
     }
     return [];
   }
@@ -96,7 +103,9 @@ class ApiService {
     final resp = await http.get(uri, headers: _headers);
     if (resp.statusCode == 200) {
       final list = jsonDecode(resp.body) as List;
-      return list.map((j) => Clinic.fromJson(j as Map<String, dynamic>)).toList();
+      return list
+          .map((j) => Clinic.fromJson(j as Map<String, dynamic>))
+          .toList();
     }
     throw ApiException('Failed to load clinics', resp.statusCode);
   }
@@ -106,7 +115,8 @@ class ApiService {
     required double longitude,
     double radiusKm = 5.0,
   }) async {
-    final uri = Uri.parse('$baseUrl/api/clinics/nearby').replace(queryParameters: {
+    final uri =
+        Uri.parse('$baseUrl/api/clinics/nearby').replace(queryParameters: {
       'latitude': latitude.toString(),
       'longitude': longitude.toString(),
       'radius_km': radiusKm.toString(),
@@ -114,7 +124,9 @@ class ApiService {
     final resp = await http.get(uri, headers: _headers);
     if (resp.statusCode == 200) {
       final list = jsonDecode(resp.body) as List;
-      return list.map((j) => Clinic.fromJson(j as Map<String, dynamic>)).toList();
+      return list
+          .map((j) => Clinic.fromJson(j as Map<String, dynamic>))
+          .toList();
     }
     throw ApiException('Failed to load nearby clinics', resp.statusCode);
   }
@@ -132,7 +144,8 @@ class ApiService {
 
   // ==================== AI ASSISTANT ====================
 
-  Future<AIChatResponse> sendChatMessage(String message, {int? conversationId}) async {
+  Future<AIChatResponse> sendChatMessage(String message,
+      {int? conversationId}) async {
     final body = {
       'message': message,
       if (conversationId != null) 'conversation_id': conversationId,
@@ -143,7 +156,8 @@ class ApiService {
       body: jsonEncode(body),
     );
     if (resp.statusCode == 200) {
-      return AIChatResponse.fromJson(jsonDecode(resp.body) as Map<String, dynamic>);
+      return AIChatResponse.fromJson(
+          jsonDecode(resp.body) as Map<String, dynamic>);
     }
     throw ApiException('AI chat failed', resp.statusCode);
   }
@@ -174,9 +188,11 @@ class ApiService {
 
   // ==================== COUNSELLING ====================
 
-  Future<List<Map<String, dynamic>>> getCounsellors({String? specialization}) async {
+  Future<List<Map<String, dynamic>>> getCounsellors(
+      {String? specialization}) async {
     final uri = Uri.parse('$baseUrl/api/counselling/counsellors/').replace(
-      queryParameters: specialization != null ? {'specialization': specialization} : null,
+      queryParameters:
+          specialization != null ? {'specialization': specialization} : null,
     );
     final resp = await http.get(uri, headers: _headers);
     if (resp.statusCode == 200) {

@@ -15,20 +15,58 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _controller;
   late Animation<double> _fadeAnim;
   late Animation<double> _scaleAnim;
+  late Animation<Offset> _slideAnim;
+
+  static const Color mascotGreen = Color(0xFF93C962);
+  static const Color mascotDarkGreen = Color(0xFF76A44E);
+  static const Color mascotLightGreen = Color(0xFFF2F9E6);
+  static const Color mascotSoftGreen = Color(0xFFE0F2C4);
 
   @override
   void initState() {
     super.initState();
+
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 1400),
+      duration: const Duration(milliseconds: 1500),
     );
+
     _fadeAnim = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0, 0.6, curve: Curves.easeIn)),
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(
+          0,
+          0.65,
+          curve: Curves.easeIn,
+        ),
+      ),
     );
-    _scaleAnim = Tween<double>(begin: 0.7, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: const Interval(0, 0.6, curve: Curves.elasticOut)),
+
+    _scaleAnim = Tween<double>(begin: 0.82, end: 1).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(
+          0,
+          0.75,
+          curve: Curves.easeOutBack,
+        ),
+      ),
     );
+
+    _slideAnim = Tween<Offset>(
+      begin: const Offset(0, 0.18),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller,
+        curve: const Interval(
+          0.2,
+          1,
+          curve: Curves.easeOutCubic,
+        ),
+      ),
+    );
+
     _controller.forward();
     _initAndNavigate();
   }
@@ -38,12 +76,15 @@ class _SplashScreenState extends State<SplashScreen>
       ApiService.instance.initSession(),
       Future.delayed(const Duration(milliseconds: 2200)),
     ]);
+
     if (!mounted) return;
+
     Navigator.of(context).pushReplacement(
       PageRouteBuilder(
         pageBuilder: (_, __, ___) => const MainNavScreen(),
-        transitionsBuilder: (_, anim, __, child) =>
-            FadeTransition(opacity: anim, child: child),
+        transitionsBuilder: (_, anim, __, child) {
+          return FadeTransition(opacity: anim, child: child);
+        },
         transitionDuration: const Duration(milliseconds: 500),
       ),
     );
@@ -58,86 +99,132 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: mascotLightGreen,
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [AppColors.gradientStart, AppColors.gradientEnd],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.white,
+              mascotLightGreen,
+              mascotSoftGreen,
+            ],
           ),
         ),
         child: SafeArea(
           child: Center(
             child: AnimatedBuilder(
               animation: _controller,
-              builder: (_, __) => FadeTransition(
-                opacity: _fadeAnim,
-                child: ScaleTransition(
-                  scale: _scaleAnim,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Container(
-                        width: 110,
-                        height: 110,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(28),
-                        ),
-                        child: const Icon(
-                          Icons.health_and_safety_rounded,
-                          size: 64,
-                          color: Colors.white,
+              builder: (_, __) {
+                return FadeTransition(
+                  opacity: _fadeAnim,
+                  child: SlideTransition(
+                    position: _slideAnim,
+                    child: ScaleTransition(
+                      scale: _scaleAnim,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 28),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 18,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(30),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: mascotGreen.withOpacity(0.16),
+                                    blurRadius: 24,
+                                    offset: const Offset(0, 10),
+                                  ),
+                                ],
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Image.asset(
+                                    'assets/left.png',
+                                    height: 104,
+                                    fit: BoxFit.contain,
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Image.asset(
+                                    'assets/right.png',
+                                    height: 48,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 26),
+                            const Text(
+                              'MASCOT',
+                              style: TextStyle(
+                                fontSize: 38,
+                                fontWeight: FontWeight.w900,
+                                color: mascotDarkGreen,
+                                letterSpacing: 3,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            const Text(
+                              'mHealth',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: mascotGreen,
+                                letterSpacing: 1.8,
+                              ),
+                            ),
+                            const SizedBox(height: 14),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 7,
+                              ),
+                              decoration: BoxDecoration(
+                                color: mascotGreen.withOpacity(0.12),
+                                borderRadius: BorderRadius.circular(24),
+                                border: Border.all(
+                                  color: mascotGreen.withOpacity(0.25),
+                                ),
+                              ),
+                              child: const Text(
+                                'Private • Supportive • Made for you',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: mascotDarkGreen,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.4,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 56),
+                            SizedBox(
+                              width: 38,
+                              height: 38,
+                              child: CircularProgressIndicator(
+                                valueColor: const AlwaysStoppedAnimation<Color>(
+                                  mascotGreen,
+                                ),
+                                strokeWidth: 3,
+                                backgroundColor: mascotGreen.withOpacity(0.15),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'MASCOT',
-                        style: TextStyle(
-                          fontSize: 38,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          letterSpacing: 4,
-                        ),
-                      ),
-                      const Text(
-                        'mHealth',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white70,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.15),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Text(
-                          'Your Health, Your Choice',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.white,
-                            letterSpacing: 1,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 60),
-                      const SizedBox(
-                        width: 36,
-                        height: 36,
-                        child: CircularProgressIndicator(
-                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white60),
-                          strokeWidth: 3,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
+                );
+              },
             ),
           ),
         ),

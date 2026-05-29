@@ -1,14 +1,34 @@
 # Flutter / Dart
 .dart_tool/
-.build/
+.packages
 .flutter-plugins
 .flutter-plugins-dependencies
-.packages
+.pub/
+.pub-cache/
 
 # Build outputs
 build/
+.build/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Environment files
+.env
+
+# Android
+android/local.properties
+key.properties
+*.jks
+*.keystore
+
+# iOS
 ios/Flutter/Flutter.framework
 ios/Flutter/Flutter.podspec
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
 
 # Generated files
 *.dill

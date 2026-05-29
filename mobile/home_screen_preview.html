@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MASCOT Home Screen Preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #d8e7d0; font-family: Poppins, Arial, sans-serif; }
+    .screen { width: 390px; min-height: 844px; background: #F2F9E6; overflow: hidden; }
+    .hero {
+      height: 220px;
+      background: linear-gradient(135deg, #93C962 0%, #76A44E 100%);
+      color: white;
+      padding: 40px 20px 0;
+    }
+    .brand { display: flex; align-items: center; gap: 8px; height: 42px; }
+    .brand img { height: 42px; object-fit: contain; display: block; }
+    h1 { margin: 20px 0 0; font-size: 26px; line-height: 1.2; font-weight: 700; letter-spacing: 0; }
+    .content { padding: 20px 16px 24px; }
+    .ai {
+      background: linear-gradient(90deg, #76A44E 0%, #93C962 100%);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+    .ai-icon, .tip-icon, .cat-icon { display: grid; place-items: center; flex: 0 0 auto; }
+    .ai-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,.20); font-size: 27px; font-weight: 700; }
+    .ai-copy { margin-left: 14px; flex: 1; }
+    .ai-title { font-size: 16px; font-weight: 700; }
+    .ai-sub { margin-top: 3px; color: rgba(255,255,255,.72); font-size: 12px; line-height: 1.4; }
+    .arrow { color: rgba(255,255,255,.60); font-size: 20px; }
+    .section-title { margin: 20px 0 12px; font-size: 17px; font-weight: 600; color: #1f2933; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .card {
+      height: 104px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(147,201,98,.10);
+    }
+    .cat-icon { width: 38px; height: 38px; border-radius: 10px; margin-right: 10px; font-size: 21px; font-weight: 700; }
+    .cat-copy { min-width: 0; }
+    .cat-label { font-size: 13px; font-weight: 600; color: #222; white-space: nowrap; }
+    .cat-sub { margin-top: 2px; font-size: 11px; color: #64748b; white-space: nowrap; }
+    .tip {
+      margin-top: 20px;
+      padding: 16px;
+      background: #E0F2C4;
+      border: 1px solid rgba(147,201,98,.30);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+    }
+    .tip-icon { width: 38px; height: 38px; border-radius: 10px; background: rgba(147,201,98,.15); color: #76A44E; margin-right: 12px; font-size: 22px; }
+    .tip-title { font-size: 13px; font-weight: 600; color: #76A44E; }
+    .tip-text { margin-top: 3px; font-size: 12px; line-height: 1.4; color: #64748b; }
+  </style>
+</head>
+<body>
+  <main class="screen">
+    <section class="hero">
+      <div class="brand">
+        <img src="assets/left.png" alt="">
+        <img src="assets/right.png" alt="">
+      </div>
+      <h1>Your health journey<br>starts here</h1>
+    </section>
+    <section class="content">
+      <div class="ai">
+        <div class="ai-icon">AI</div>
+        <div class="ai-copy">
+          <div class="ai-title">Ask MASCOT AI</div>
+          <div class="ai-sub">Get private, confidential answers<br>about sexual health</div>
+        </div>
+        <div class="arrow">&rsaquo;</div>
+      </div>
+      <div class="section-title">Explore</div>
+      <div class="grid">
+        <div class="card"><div class="cat-icon" style="background:rgba(147,201,98,.10);color:#93C962">&#9654;</div><div class="cat-copy"><div class="cat-label">Video Guides</div><div class="cat-sub">How-to tutorials</div></div></div>
+        <div class="card"><div class="cat-icon" style="background:rgba(118,164,78,.10);color:#76A44E">&ldquo;</div><div class="cat-copy"><div class="cat-label">Testimonials</div><div class="cat-sub">Real stories</div></div></div>
+        <div class="card"><div class="cat-icon" style="background:rgba(217,119,6,.10);color:#D97706">&#9679;</div><div class="cat-copy"><div class="cat-label">Counselling</div><div class="cat-sub">Talk to a pro</div></div></div>
+        <div class="card"><div class="cat-icon" style="background:rgba(5,150,105,.10);color:#059669">&bull;&bull;</div><div class="cat-copy"><div class="cat-label">Support Groups</div><div class="cat-sub">Peer support</div></div></div>
+      </div>
+      <div class="tip">
+        <div class="tip-icon">i</div>
+        <div>
+          <div class="tip-title">Health Tip</div>
+          <div class="tip-text">Consistent condom use reduces HIV transmission risk by up to 85%. Use correctly every time.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

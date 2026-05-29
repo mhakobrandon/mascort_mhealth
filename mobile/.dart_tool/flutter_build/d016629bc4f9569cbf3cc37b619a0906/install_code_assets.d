@@ -1,1 +1,0 @@
- C:\\Users\\bk\\Documents\\mascort_mhealth\\mobile\\.dart_tool\\flutter_build\\d016629bc4f9569cbf3cc37b619a0906\\native_assets.json: 

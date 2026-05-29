@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import 'video_guides_screen.dart';
-import 'testimonials_screen.dart';
 import 'commodity_request_screen.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -18,31 +17,40 @@ class MoreScreen extends StatelessWidget {
           children: [
             _buildProfileCard(),
             const SizedBox(height: 24),
-            const Text('Health Resources', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            const Text('Health Resources',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(height: 12),
             _MoreItem(
               icon: Icons.play_circle_outline_rounded,
               label: 'Video Guides',
               subtitle: 'Step-by-step health tutorials',
               color: const Color(0xFF7C3AED),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const VideoGuidesScreen())),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const VideoGuidesScreen())),
             ),
-            _MoreItem(
-              icon: Icons.format_quote_rounded,
-              label: 'Community Stories',
-              subtitle: 'Real experiences from peers',
-              color: const Color(0xFF059669),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const TestimonialsScreen())),
-            ),
+            // _MoreItem(
+            //   icon: Icons.format_quote_rounded,
+            //   label: 'Community Stories',
+            //   subtitle: 'Real experiences from peers',
+            //   color: const Color(0xFF059669),
+            //   onTap: () => Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //           builder: (_) => const TestimonialsScreen())),
+            // ),
             _MoreItem(
               icon: Icons.inventory_2_outlined,
               label: 'Request Supplies',
               subtitle: 'Condoms, pills, HIV test kits',
               color: const Color(0xFFD97706),
-              onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_) => const CommodityRequestScreen())),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (_) => const CommodityRequestScreen())),
             ),
             const SizedBox(height: 20),
-            const Text('Support', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            const Text('Support',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(height: 12),
             _MoreItem(
               icon: Icons.chat_bubble_outline_rounded,
@@ -59,7 +67,8 @@ class MoreScreen extends StatelessWidget {
               onTap: () {},
             ),
             const SizedBox(height: 20),
-            const Text('About', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+            const Text('About',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(height: 12),
             _MoreItem(
               icon: Icons.info_outline_rounded,
@@ -79,11 +88,15 @@ class MoreScreen extends StatelessWidget {
             Center(
               child: Column(
                 children: [
-                  const Icon(Icons.health_and_safety_rounded, size: 32, color: AppColors.primary),
+                  const Icon(Icons.health_and_safety_rounded,
+                      size: 32, color: AppColors.primary),
                   const SizedBox(height: 6),
-                  const Text('MASCOT mHealth v1.0.0', style: TextStyle(color: AppColors.textSecondary, fontSize: 12)),
+                  const Text('MASCOT mHealth v1.0.0',
+                      style: TextStyle(
+                          color: AppColors.textSecondary, fontSize: 12)),
                   Text('Team HealthBridge • University of Zimbabwe',
-                      style: TextStyle(color: AppColors.textLight, fontSize: 11)),
+                      style:
+                          TextStyle(color: AppColors.textLight, fontSize: 11)),
                 ],
               ),
             ),
@@ -112,15 +125,21 @@ class MoreScreen extends StatelessWidget {
               color: Colors.white.withOpacity(0.25),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: const Icon(Icons.person_rounded, color: Colors.white, size: 28),
+            child:
+                const Icon(Icons.person_rounded, color: Colors.white, size: 28),
           ),
           const SizedBox(width: 14),
           const Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Anonymous User', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 16)),
-                Text('Your identity is protected', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                Text('Anonymous User',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16)),
+                Text('Your identity is protected',
+                    style: TextStyle(color: Colors.white70, fontSize: 12)),
               ],
             ),
           ),
@@ -135,7 +154,8 @@ class MoreScreen extends StatelessWidget {
               children: [
                 Icon(Icons.lock_rounded, size: 12, color: Colors.white),
                 SizedBox(width: 4),
-                Text('Private', style: TextStyle(color: Colors.white, fontSize: 11)),
+                Text('Private',
+                    style: TextStyle(color: Colors.white, fontSize: 11)),
               ],
             ),
           ),
@@ -157,7 +177,9 @@ class MoreScreen extends StatelessWidget {
           style: TextStyle(height: 1.6),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close')),
         ],
       ),
     );
@@ -183,7 +205,9 @@ class MoreScreen extends StatelessWidget {
           ),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+          TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Close')),
         ],
       ),
     );
@@ -217,9 +241,12 @@ class _MoreItem extends StatelessWidget {
         ),
         child: Icon(icon, color: color, size: 22),
       ),
-      title: Text(label, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
-      subtitle: Text(subtitle, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
-      trailing: const Icon(Icons.arrow_forward_ios_rounded, size: 14, color: AppColors.textLight),
+      title: Text(label,
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14)),
+      subtitle: Text(subtitle,
+          style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+      trailing: const Icon(Icons.arrow_forward_ios_rounded,
+          size: 14, color: AppColors.textLight),
     );
   }
 }
