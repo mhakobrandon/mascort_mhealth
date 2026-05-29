@@ -36,20 +36,6 @@ export default function TestimonialsPage() {
         </button>
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
-        {[
-          { value: '2,400+', label: 'Students Helped', color: 'text-primary-600 bg-primary-50' },
-          { value: '4.9/5', label: 'Average Rating', color: 'text-green-600 bg-green-50' },
-          { value: '98%', label: 'Would Recommend', color: 'text-amber-600 bg-amber-50' },
-        ].map(({ value, label, color }) => (
-          <div key={label} className={`${color} rounded-2xl p-4 text-center`}>
-            <div className="text-2xl font-black">{value}</div>
-            <div className="text-sm opacity-70">{label}</div>
-          </div>
-        ))}
-      </div>
-
       {/* Submit form */}
       {showForm && (
         <div className="card p-6 mb-8 border-primary-200">

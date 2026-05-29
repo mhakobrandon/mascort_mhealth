@@ -19,18 +19,96 @@ body {
   margin: 0;
 }
 
-@keyframes dropFlash {
-  0%   { transform: translateY(-40px); opacity: 0; }
-  45%  { transform: translateY(0);     opacity: 1; }
-  55%  { background-color: #ffffff; }
-  63%  { background-color: #E0F2C4; }
-  71%  { background-color: #ffffff; }
-  79%  { background-color: #E0F2C4; }
-  100% { transform: translateY(0); background-color: #ffffff; opacity: 1; }
+@keyframes statsBarIn {
+  0%   { transform: translateY(100%); opacity: 0; }
+  60%  { transform: translateY(0);    opacity: 1; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes statsFlash {
+  0%, 100% { background-color: #ffffff; box-shadow: 0 -2px 12px rgba(147,201,98,0); }
+  50%       { background-color: #F2F9E6; box-shadow: 0 -4px 20px rgba(147,201,98,0.35); }
 }
 
 .animate-drop-flash {
-  animation: dropFlash 1.6s ease-out forwards;
+  animation: statsBarIn 0.7s cubic-bezier(0.22,1,0.36,1) forwards,
+             statsFlash 2s ease-in-out 0.7s 3;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-14px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes authModalIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up-delay-1 { animation: fadeInUp 0.6s ease-out 0.15s both; }
+.animate-fade-in-up-delay-2 { animation: fadeInUp 0.6s ease-out 0.3s both; }
+.animate-fade-in-up-delay-3 { animation: fadeInUp 0.6s ease-out 0.45s both; }
+
+@keyframes chatWidgetOpen {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)    scale(1); }
+}
+@keyframes chatWidgetClose {
+  from { opacity: 1; transform: translateY(0)    scale(1); }
+  to   { opacity: 0; transform: translateY(20px) scale(0.95); }
+}
+@keyframes chatBounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30%           { transform: translateY(-5px); }
+}
+@keyframes chatLabelFloat {
+  0%, 100% { transform: translateY(0px); }
+  50%      { transform: translateY(-6px); }
+}
+@keyframes chatLabelIn {
+  from { opacity: 0; transform: translateX(20px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+@keyframes chatPing {
+  0%   { transform: scale(1);   opacity: 0.7; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes chatGlow {
+  0%, 100% { box-shadow: 0 0 0   0px rgba(147,201,98,0.5), 0 6px 24px rgba(90,125,59,0.4); }
+  50%      { box-shadow: 0 0 0  10px rgba(147,201,98,0),   0 6px 24px rgba(90,125,59,0.5); }
+}
+@keyframes chatPromptFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chat-widget-open    { animation: chatWidgetOpen  0.3s cubic-bezier(0.22,1,0.36,1) forwards; }
+.chat-widget-close   { animation: chatWidgetClose 0.22s ease-in forwards; }
+.chat-label-float    { animation: chatLabelFloat  3.5s ease-in-out infinite; }
+.chat-label-in       { animation: chatLabelIn     0.4s cubic-bezier(0.22,1,0.36,1) both; }
+.chat-ping           { animation: chatPing        1.6s ease-out infinite; }
+.chat-btn-glow       { animation: chatGlow        2.2s ease-in-out infinite; }
+.chat-prompt-in      { animation: chatPromptFadeIn 0.35s ease-out both; }
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 @layer components {

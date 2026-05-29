@@ -42,7 +42,7 @@ async def chat_with_ai(
     user_id = _get_user_id_from_token(authorization)
 
     try:
-        result = await rag_pipeline.query(request.message)
+        result = await rag_pipeline.query(request.message, language=request.language or "en")
     except Exception as e:
         logger.error(f"RAG pipeline error: {e}")
         raise HTTPException(status_code=503, detail="AI assistant temporarily unavailable")

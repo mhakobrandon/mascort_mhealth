@@ -69,3 +69,8 @@ Thumbs.db
 *.temp
 tmp/
 temp/
+
+
+# Kotlin DSL Gradle files
+*.gradle.kts
+

@@ -96,8 +96,8 @@ export interface ChatResponse {
   timestamp: string
 }
 
-export async function sendChatMessage(message: string, conversationId?: number) {
-  const body: Record<string, unknown> = { message }
+export async function sendChatMessage(message: string, conversationId?: number, language = 'en') {
+  const body: Record<string, unknown> = { message, language }
   if (conversationId) body.conversation_id = conversationId
   const { data } = await api.post<ChatResponse>('/ai/chat', body)
   return data

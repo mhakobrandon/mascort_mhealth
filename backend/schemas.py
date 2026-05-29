@@ -132,6 +132,7 @@ class Session(SessionBase):
 
 class MessageRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=2000)
+    language: Optional[str] = "en"   # 'en' | 'sn' (Shona) | 'nd' (Ndebele)
 
 class MessageResponse(BaseModel):
     response: str

@@ -121,7 +121,7 @@ class RAGPipeline:
         except Exception as e:
             logger.error(f"Vector store setup failed: {e} — using keyword fallback")
 
-    async def query(self, question: str) -> Dict:
+    async def query(self, question: str, language: str = "en") -> Dict:
         """
         Answer a health question using RAG.
         Falls back to keyword search + template answer when LLM unavailable.
@@ -132,9 +132,9 @@ class RAGPipeline:
         relevant = self._retrieve_relevant_chunks(question)
 
         if self._vector_store and self._llm:
-            return await self._llm_answer(question, relevant)
+            return await self._llm_answer(question, relevant, language)
 
-        return self._keyword_answer(question, relevant)
+        return self._keyword_answer(question, relevant, language)
 
     def _retrieve_relevant_chunks(self, question: str, top_k: int = 4) -> List[Dict]:
         """Retrieve relevant chunks — vector search or keyword fallback."""
@@ -164,19 +164,36 @@ class RAGPipeline:
         scored.sort(key=lambda x: x[0], reverse=True)
         return [c for _, c in scored[:top_k]]
 
-    async def _llm_answer(self, question: str, context_chunks: List[Dict]) -> Dict:
+    _LANG_INSTRUCTIONS = {
+        "sn": (
+            "CRITICAL: You MUST respond ENTIRELY in ChiShona (Zimbabwe Shona). "
+            "Every sentence must be in ChiShona. Only keep medical terms that have "
+            "no Shona equivalent in English (e.g. HIV, PrEP, IUD, condom). "
+            "Do not write any full sentences in English."
+        ),
+        "nd": (
+            "CRITICAL: You MUST respond ENTIRELY in IsiNdebele (Zimbabwe Ndebele). "
+            "Every sentence must be in IsiNdebele. Only keep medical terms that have "
+            "no Ndebele equivalent in English (e.g. HIV, PrEP, IUD, condom). "
+            "Do not write any full sentences in English."
+        ),
+    }
+
+    async def _llm_answer(self, question: str, context_chunks: List[Dict], language: str = "en") -> Dict:
         """Generate answer via GPT-4o-mini with retrieved context."""
         from langchain.schema import HumanMessage, SystemMessage
 
         context = "\n\n---\n\n".join(c["content"] for c in context_chunks)
         sources = list({c["source"] for c in context_chunks})
 
+        lang_instruction = self._LANG_INSTRUCTIONS.get(language, "")
         system_prompt = (
             "You are MASCOT, a friendly and non-judgmental sexual health assistant "
             "for young people in Zimbabwe. Answer ONLY based on the provided health "
             "information. If the answer is not in the context, say so clearly and "
             "recommend visiting a clinic. Keep answers concise and youth-friendly. "
             "Never shame or judge."
+            + (f" {lang_instruction}" if lang_instruction else "")
         )
 
         user_prompt = f"""Health information context:
@@ -200,31 +217,46 @@ Please answer based only on the above health information."""
             logger.error(f"LLM invocation failed: {e}")
             return self._keyword_answer(question, context_chunks)
 
-    def _keyword_answer(self, question: str, context_chunks: List[Dict]) -> Dict:
+    _NO_INFO = {
+        "en": (
+            "I don't have specific information about that in my health documents. "
+            "Please visit a clinic or call the MASCOT helpline for personalised advice."
+        ),
+        "sn": (
+            "Handina ruzivo rwakakwana pamusoro pezvo mumabhuku angu ehutano. "
+            "Ndapota shanyirai chipatara kana fonai MASCOT helpline kuti muwane mazano anokukodzera."
+        ),
+        "nd": (
+            "Angilwazi olwanele mayelana nalokho emibhalweni yami yezempilo. "
+            "Sicela uvakashele ikhliniki noma usithumelele i-MASCOT helpline ukuze uthole izeluleko ezikhethele wena."
+        ),
+    }
+
+    _INTRO = {
+        "en": "Based on MASCOT health resources:\n\n{excerpt}\n\nFor more personalised advice, please visit a clinic or speak to a counsellor.",
+        "sn": "Zvichienderana nemabhuku ehutano ezveMASCOT:\n\n{excerpt}\n\nKuti uwane mazano anokukodzera, shanyirai chipatara kana kutaura nenurse kana counsellor.",
+        "nd": "Ngokwezincwadi zempilo ze-MASCOT:\n\n{excerpt}\n\nUkuze uthole izeluleko ezikhethele wena, sicela uvakashele ikhliniki noma ukhulume lomhlengikazi.",
+    }
+
+    def _keyword_answer(self, question: str, context_chunks: List[Dict], language: str = "en") -> Dict:
         """Generate a template answer when LLM is unavailable."""
         if not context_chunks:
             return {
-                "response": (
-                    "I don't have specific information about that in my health documents. "
-                    "Please visit a clinic or call the MASCOT helpline for personalised advice."
-                ),
+                "response": self._NO_INFO.get(language, self._NO_INFO["en"]),
                 "confidence": 0.3,
                 "sources": [],
             }
 
         top = context_chunks[0]["content"]
-        # Return the most relevant chunk excerpt as the answer
         excerpt = top[:600].strip()
         if len(top) > 600:
             excerpt += "..."
 
         sources = list({c["source"].replace(".txt", "").replace("_", " ") for c in context_chunks})
+        template = self._INTRO.get(language, self._INTRO["en"])
 
         return {
-            "response": (
-                f"Based on MASCOT health resources:\n\n{excerpt}\n\n"
-                f"For more personalised advice, please visit a clinic or speak to a counsellor."
-            ),
+            "response": template.format(excerpt=excerpt),
             "confidence": 0.6,
             "sources": sources,
         }

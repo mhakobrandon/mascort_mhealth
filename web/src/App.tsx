@@ -23,10 +23,13 @@ export default function App() {
         <Route path="/prevention" element={<PreventionPage />} />
         <Route path="/prevention/:id" element={<PreventionDetailPage />} />
         <Route path="/clinics" element={<ClinicsPage />} />
-        <Route path="/chat" element={<AIChatPage />} />
         <Route path="/videos" element={<VideoGuidesPage />} />
         <Route path="/stories" element={<TestimonialsPage />} />
         <Route path="/request" element={<RequestSuppliesPage />} />
+      </Route>
+      {/* Chat gets its own full-height layout without header or footer */}
+      <Route element={<Layout withFooter={false} withHeader={false} />}>
+        <Route path="/chat" element={<AIChatPage />} />
       </Route>
     </Routes>
   )
