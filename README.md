@@ -136,21 +136,6 @@ JWT_SECRET=min_32_character_secret
 ENVIRONMENT=development
 ```
 
-## 📞 Support
-
-**CeSHHAR Zimbabwe**
-- Email: mascot.hackathon@ceshhar.org
-- Phone: +263783945058 or 0715540613
-
-## 📄 Hackathon Info
-
-**Event:** MASCOT Hackathon 2026
-**Purpose:** Design youth-centered mHealth platform for HIV/pregnancy prevention
-**Team Size:** 2-5 people (aged 18-24)
-**Requirements:** At least 1 coder, 2+ students
-**Date:** May 27-28, 2026
-**Application Deadline:** May 19, 2026
-
 ## 🎯 Next Steps
 
 1. ✅ Backend project structure created
